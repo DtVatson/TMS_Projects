@@ -23,11 +23,10 @@ stages {
             steps {
 
                 script{
-
-
+                        withCredentials([string(credentialsId: 'telegramToken', variable: 'TOKEN'),
+                        string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')])
                         sh """
-
-                        curl -s -X POST https://api.telegram.org/bot6916827290:AAF-EXvxazvbhAO-qp_OYGVV8KyewjkTs7k/sendMessage -d chat_id=399553676 -d parse_mode="HTML" -d text="<b>Project</b> : POC \
+                        curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode="HTML" -d text="<b>Project</b> : POC \
                         <b>Branch</b>: master \
                         <b>Build </b> : OK \
                         <b>Test suite</b> = Passed"
