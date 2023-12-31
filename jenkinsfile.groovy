@@ -1,6 +1,8 @@
 pipeline {
 agent {label 'node1' }
 
+tools {nodejs "node"}
+
 environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
@@ -9,31 +11,47 @@ environment {
         string(name: 'DOCKERHUB_USERNAME', description: 'DockerHub Username')
         string(name: 'USERNAME_HOST', description: 'Username Host')
         string(name: 'IP_HOST', description: 'Host IP')
+        string(name: 'TOKEN', description: 'Host IP')
+        string(name: 'CHAT_ID', description: 'Host IP')
     }
 */
 stages {
         stage("Clone code") {
-            /*
+            
             steps {
                 echo "Clone code from the GitHub repository"
-                echo "send message"
-                //git url: "https://github.com/DtVatson/TMS_Projects.git", branch: "main"
+                git url: "https://github.com/DtVatson/TMS_Projects.git", branch: "main"
             }
-            */
+        }
+        
+        stage('Install dependencies') {
+            steps {
+                sh 'cd /home/jenkins/jenkins-agent/workspace/test/apps/backend && npm install'
+            }
+            }
+     
+        stage('Test') {
+            steps {
+                sh 'cd /home/jenkins/jenkins-agent/workspace/test/apps/backend && npm test'
+            }
+        }
+        
+            /*
             steps {
 
                 script{
-                        withCredentials([string(credentialsId: 'telegramToken', variable: 'TOKEN'),
-                        string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')])
+                        
+                        /*
                         sh """
-                        curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode="HTML" -d text="<b>Project</b> : POC \
+                        curl -s -X POST https://api.telegram.org/bot${params.TOKEN}/sendMessage -d chat_id=${params.CHAT_ID} -d parse_mode="HTML" -d text="<b>Project</b> : POC \
                         <b>Branch</b>: master \
                         <b>Build </b> : OK \
                         <b>Test suite</b> = Passed"
                         """
                         }
                     }
-                }
+                    */
+                
         /*
         stage("Build") {
             steps {
