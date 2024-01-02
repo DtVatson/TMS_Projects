@@ -57,7 +57,8 @@ module "prod_sg" {
   vpc_id               = module.network.vpc_id
 
   ingress_ports        = [
-    { from_port = 3000, to_port = 3000 },
+    { from_port = 22, to_port = 22 },
+    { from_port = 3000, to_port = 3000 }
   ]
   ingress_protocol     = "tcp"
   ingress_cidr_blocks  = ["0.0.0.0/0"]
@@ -73,7 +74,7 @@ module "jenkins_master" {
 
   name                  = "dos_15_kepets_jenkins_master"
   instance_type         = "t2.micro"
-  key_name              = "DOS_15_Kepets"
+  key_name              = "DOS_15_kepets"
   subnet_id             = element(module.network.public_subnet_ids, 0)
   security_group_id     = module.jenkins_master_sg.security_group_id
   volume_size           = 8
@@ -87,7 +88,7 @@ module "jenkins_slave" {
 
   name                  = "dos_15_kepets_jenkins_slave"
   instance_type         = "t2.micro"
-  key_name              = "DOS_15_Kepets"
+  key_name              = "DOS_15_kepets"
   subnet_id             = element(module.network.public_subnet_ids, 0)
   security_group_id     = module.jenkins_slave_sg.security_group_id
   volume_size           = 8
@@ -110,7 +111,7 @@ module "prod_stage" {
 
   name                  = "dos_15_kepets_prod_stage"
   instance_type         = "t2.micro"
-  key_name              = "DOS_15_Kepets"
+  key_name              = "DOS_15_kepets"
   subnet_id             = element(module.network.public_subnet_ids, 0)
   security_group_id     = module.prod_sg.security_group_id
   volume_size           = 8
@@ -119,15 +120,15 @@ module "prod_stage" {
   user_data             = <<-EOF
     #!/bin/bash
     sudo yum update -y || exit 1
-    sudo yum install git -y || exit 1
-    sudo apt install curl software-properties-common ca-certificates apt-transport-https -y || exit 1
-    wget -O- https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor | sudo tee /etc/apt/keyrings/docker.gpg > /dev/null
-    echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu jammy stable"| sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt update -y || exit 1
-    sudo apt install docker-ce -y || exit 1
-    sudo systemctl status docker
-    sudo apt install docker-compose -y || exit 1
-    sudo usermod -aG docker $USER || exit 1
-    sudo chmod 666 /var/run/docker.sock || exit 1
+    sudo amazon-linux-extras install docker -y || exit 1
+    sudo service docker start || exit 1
+    sudo service docker status || exit 1
+    sudo groupadd docker || exit 1
+    sudo usermod -a -G docker ec2-user || exit 1
+    newgrp docker || exit 1
+    docker --version || exit 1
+    sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose || exit 1
+    sudo chmod +x /usr/local/bin/docker-compose || exit 1
+    docker-compose version || exit 1
   EOF
 }
