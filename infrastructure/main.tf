@@ -132,3 +132,21 @@ module "prod_stage" {
     docker-compose version || exit 1
   EOF
 }
+
+module "ecr_frontend" {
+  source = "./modules/ecr"
+
+  name                  = "frontend_dos_15_kepets"
+  image_tag_mutability  = "IMMUTABLE"
+  scan_on_push          = true
+
+}
+
+module "ecr_backend" {
+  source = "./modules/ecr"
+
+  name                  = "backend_dos_15_kepets"
+  image_tag_mutability  = "IMMUTABLE"
+  scan_on_push          = true
+
+}

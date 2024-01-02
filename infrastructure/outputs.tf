@@ -66,3 +66,22 @@ output "prod_stage_public_ip" {
   value       = module.prod_stage.public_ip
   description = "The public IP address of the Production Stage instance"
 }
+
+output "backend_repository_registry_id" {
+  description = "The registry ID where the repository was created"
+  value       = module.ecr_backend.repository_registry_id
+}
+
+output "backend_repository_url" {
+  description = "The URL of the repository"
+  value       = module.ecr_backend.repository_url
+}
+
+output "frontend_repository_registry_id" {
+  description = "The registry ID where the repository was created"
+  value       = module.ecr_frontend.repository_registry_id
+}
+output "frontend_repository_url" {
+  description = "The URL of the repository"
+  value       = module.ecr_frontend.repository_url
+}
