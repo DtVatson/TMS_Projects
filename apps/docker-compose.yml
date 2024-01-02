@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   web:
-    image: drvatson/frontend
+    image: 335809563306.dkr.ecr.us-east-1.amazonaws.com/frontend_dos_15_kepets:latest
     depends_on:
       - api
     ports:
@@ -9,14 +9,14 @@ services:
     networks:
       - network-backend
   api:
-    image: drvatson/backend
+    image: 335809563306.dkr.ecr.us-east-1.amazonaws.com/backend_dos_15_kepets:latest
     depends_on:
       - mongo
     ports:
       - "3001:3001"
     networks: 
      - network-backend
-  
+     
   mongo:
     image: mongo
     restart: always
