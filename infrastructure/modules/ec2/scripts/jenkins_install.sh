@@ -5,6 +5,7 @@ sudo systemctl restart sshd.service || exit 1
 sleep 5
 
 sudo yum update -y || exit 1
+sudo yum install git -y || exit 1
 
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo || exit 1
 sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key || exit 1
