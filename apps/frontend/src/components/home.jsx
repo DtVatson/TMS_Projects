@@ -88,7 +88,7 @@ const Home = () => {
             })}
           </ListGroup>
           <Button onClick={() => setModalOpen(true)} color="primary">
-            Add Todo test
+            Add Todo test 1
           </Button>
         </CardBody>
       </Card>
