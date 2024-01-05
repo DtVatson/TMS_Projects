@@ -76,6 +76,7 @@ stages {
                         sh "ssh -o StrictHostKeyChecking=no ${params.USERNAME_HOST}@${params.IP_HOST} aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${params.AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com"
                         sh "ssh -o StrictHostKeyChecking=no ${params.USERNAME_HOST}@${params.IP_HOST} docker pull ${params.AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/backend_dos_15_kepets:latest"
                         sh "ssh -o StrictHostKeyChecking=no ${params.USERNAME_HOST}@${params.IP_HOST} docker pull ${params.AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/frontend_dos_15_kepets:latest"
+                        sh "ssh -o StrictHostKeyChecking=no ${params.USERNAME_HOST}@${params.IP_HOST} docker-compose -f /home/ec2-user/TMS_Projects/apps/docker-compose.yml stop"
                         sh "ssh -o StrictHostKeyChecking=no ${params.USERNAME_HOST}@${params.IP_HOST} docker-compose -f /home/ec2-user/TMS_Projects/apps/docker-compose.yml up -d"
                 }
             }

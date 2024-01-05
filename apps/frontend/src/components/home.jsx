@@ -94,7 +94,7 @@ const Home = () => {
       </Card>
       <Modal isOpen={modalOpen}>
         <ModalHeader toggle={() => setModalOpen(!modalOpen)}>
-          Add new Todo
+          Add new Todo test
         </ModalHeader>
         <ModalBody>
           <TodoForm saveTodo={handleNewTodo} />
