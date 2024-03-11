@@ -86,14 +86,14 @@ stages {
 post {
         success {
             sh """
-                curl -s -X POST https://api.telegram.org/bot6916827290:AAF-EXvxazvbhAO-qp_OYGVV8KyewjkTs7k/sendMessage -d chat_id=399553676 -d parse_mode="HTML" -d text="<b>Project</b> : POC "\"
+                curl -s -X POST https://api.telegram.org/bot${params.TOKEN}/sendMessage -d chat_id=${params.CHAT_ID} -d parse_mode="HTML" -d text="<b>Project</b> : POC "\"
                 CI/CD Pipeline has completed "\"
                 CI/CD Pipeline successfully executed. Great job!"
                 """
         }
         failure {
             sh """
-            curl -s -X POST https://api.telegram.org/bot6916827290:AAF-EXvxazvbhAO-qp_OYGVV8KyewjkTs7k/sendMessage -d chat_id=399553676 -d parse_mode="HTML" -d text="<b>Project</b> : POC "\"
+            curl -s -X POST https://api.telegram.org/bot${params.TOKEN}/sendMessage -d chat_id=${params.CHAT_ID} -d parse_mode="HTML" -d text="<b>Project</b> : POC "\"
             CI/CD Pipeline has completed "\"
             CI/CD Pipeline encountered errors. Check the logs for details."
             """    
