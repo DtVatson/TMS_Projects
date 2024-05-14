@@ -56,7 +56,9 @@ spec:
              when {
                 branch "main"
             }
+            steps {
             echo "deploy"
+            }
         }
     }
 }
