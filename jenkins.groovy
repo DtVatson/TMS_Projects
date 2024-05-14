@@ -57,7 +57,7 @@ spec:
                 branch "development"
             }
             steps {
-                echo 'deploy 2'
+                echo 'deploy 4'
             }
         }
     }
