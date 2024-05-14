@@ -8,3 +8,5 @@ The Terraform script included in this project sets up the following infrastructu
 Virtual Private Cloud (VPC)
 EC2 instances for Jenkins Master and Jenkins Agent
 Security Groups to control inbound and outbound traffic for the EC2 instances
+# Application Stack
+The web application is developed using React and Node.js, providing a modern and scalable architecture. It communicates with a PostgreSQL database for data storage and retrieval.
