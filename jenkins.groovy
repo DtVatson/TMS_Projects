@@ -54,10 +54,10 @@ spec:
 
         stage ('check prod'){
             when {
-                branch "development"
+                branch "main"
             }
             steps {
-                echo 'deploy 4'
+                echo 'deploy 5'
             }
         }
     }
