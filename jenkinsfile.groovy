@@ -42,7 +42,7 @@ spec:
     stages {
         stage('Delete workspace before build starts') {
             steps {
-                echo 'Deleting workspace'
+                echo 'Deleting workspace 1'
             }
         }
         
