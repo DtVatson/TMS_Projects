@@ -46,18 +46,18 @@ spec:
             }
         }
 
-        stages ('check variables') {
+        stage ('check variables') {
             steps {
                 sh 'ls -la'
             }
         }
 
-        stages ('check prod'){
+        stage ('check prod'){
             when {
                 branch "development"
             }
             steps {
-                echo 'deploy'
+                echo 'deploy 2'
             }
         }
     }
